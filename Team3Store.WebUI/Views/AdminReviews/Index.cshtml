@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Team3Store.Domain.Entities.Review>
+
+@{
+    ViewBag.Title = "Admin: All Products Reviews";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="panel panel-default">
+    <table class="table table-striped table-condensed table-bordered table-striped table-responsive table-hover">
+        <thead>
+            <tr class="danger">
+                @foreach (var property in Model.GetType().GetGenericArguments()[0].GetProperties())
+                {
+                    <th>@property.Name</th>
+
+                }
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    @foreach (var property in item.GetType().GetProperties())
+                    {
+                        <td>@property.GetValue(item)</td>
+
+                    }
+
+                    <td>
+                        @*@Html.Label(item.Id.ToString())*@
+
+                        @Html.ActionLink("Edit product review", "Edit", "AdminReviews", new { reviewId = item.Id }, new { @class = "btn btn-default btn-xs" })
+
+                        @using (Html.BeginForm("Delete", "AdminReviews"))
+                        {
+                            @Html.Hidden("reviewId", item.Id)
+                            <input type="submit"
+                                   class="btn btn-default btn-xs"
+                                   value="Delete" />
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="panel-footer">
+        @Html.ActionLink("Add a new review", "Create", null,
+        new { @class = "btn btn-default" })
+    </div>
+</div>

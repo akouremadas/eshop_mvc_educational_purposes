@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Team3Store.Domain.Entities.Product>
+
+@{
+    ViewBag.Title = "Team3Store";
+}
+<div class="container body-content">
+    <h1>Latest Products</h1>
+    @foreach (var p in Model)
+    {
+        <div>
+            <h3>@p.Name</h3>
+            <br />
+            <img src=@p.ImgUrl width="400" height="450">
+
+
+            <h4>@p.Price.ToString("c")</h4>
+        </div>}
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Getting started</h2>
+        <p>
+            agile development.
+        </p>
+        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Get more libraries</h2>
+        <p>NuGet iso projects.</p>
+        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Web Hosting</h2>
+        <p>Yres and price for your applications.</p>
+        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+    </div>
+</div>

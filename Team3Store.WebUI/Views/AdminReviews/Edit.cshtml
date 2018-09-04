@@ -1,0 +1,43 @@
+﻿@model Team3Store.Domain.Entities.Review
+@{
+    ViewBag.Title = "Admin: Edit " + @Model.Name;
+    Layout = "~/Views/Shared/_AdminEditLayout.cshtml";
+}
+
+<div class="panel">
+    @using (Html.BeginForm("Edit", "AdminReviews"))
+    {
+        <div class="panel-body">
+            @Html.HiddenFor(m => Model.Id)
+            @foreach (var property in ViewData.ModelMetadata.Properties)
+            {
+                if (property.PropertyName != "Id" &&
+                    property.PropertyName != "DateCreated" &&
+                    property.PropertyName != "DateUpdated" &&
+                    property.PropertyName != "CreatedBy" &&
+                    property.PropertyName != "UpdatedBy")
+                {
+                    <div class="form-group">
+                        <label>@(property.DisplayName ?? property.PropertyName)</label>
+                        @if (property.PropertyName == "Description")
+                        {
+                            @Html.TextArea(property.PropertyName, null,
+                            new { @class = "form-control", rows = 5 })
+                        }
+                        else
+                        {
+                            @Html.TextBox(property.PropertyName, null,
+                            new { @class = "form-control" })
+                        }
+                    </div>
+                }
+            }
+        </div>
+        <div class="panel-footer">
+            <input type="submit" value="Save" class="btn btn-primary" />
+            @Html.ActionLink("Cancel and return to List", "Index", null, new {
+            @class = "btn btn-default"
+            })
+        </div>
+    }
+</div>

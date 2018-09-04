@@ -1,0 +1,59 @@
+﻿@model Team3Store.Domain.Entities.Product
+
+@{
+    ViewBag.Title = "Description";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.Name</h2>
+
+<br />
+<div class="row">
+    <div class="col-md-6">
+        <img src="@Model.ImgUrl" width="500" height="550">
+    </div>
+
+    <div class="col-md-3">
+        <h3>@Model.Name </h3>
+        <ul class="list-group">
+            <li class="list-group-item  justify-content-between ">
+                @Model.Description
+            </li>
+
+            <li class="list-group-item justify-content-between ">
+                @Model.Price.ToString() €
+            </li>
+
+            <li class="list-group-item  justify-content-between ">
+
+                <div class="dropdown">
+                    <button class="dropdown-header" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Select Size
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="Select Size">
+                        <a class="dropdown-item" href="#">Small</a>
+                        <a class="dropdown-item" href="#">Medium</a>
+                        <a class="dropdown-item" href="#">Large</a>
+                    </div>
+
+                </div>
+
+            </li>
+            <li class="list-group-item  justify-content-between ">
+
+
+                @using (Html.BeginForm("AddToCart", "Cart"))
+                {
+                    <div class="pull-right">
+                        @Html.HiddenFor(x => Model.Id)
+                        @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+                        <input type="submit" class="btn-primary" value="Add to cart" />
+                    </div>
+                }
+            </li>
+
+
+
+        </ul>
+    </div>
+</div>
